@@ -8,9 +8,9 @@ Time spent: 1 hour
 
 #### Required
 
-- [ ] Walkthrough Gif embedded in README
+- [x] Walkthrough Gif embedded in README
 - [x] README `Time spent:` includes the number of hours spent on the assignment
-- [ ] Client can make GET requests to get file or directory contents
+- [x] Client can make GET requests to get file or directory contents
 - [ ] Client can download a directory as an archive
 - [ ] Client can make HEAD request to get just the GET headers 
 - [ ] Client can make PUT requests to create new directories and files with content
