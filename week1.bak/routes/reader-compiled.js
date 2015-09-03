@@ -1,6 +1,8 @@
 /**
  * Created by svaddi on 9/1/15.
  */
+'use strict';
+
 var express = require('express');
 var router = express.Router();
 
@@ -11,14 +13,11 @@ var fs = require('fs');
 /* GET file name */
 router.get('/', execute);
 
-function execute (req, res, next) {
+function execute(req, res, next) {
     var filename = url.parse(req.url).query;
-    //var filename = req.params['filename'];
-    //var filename = req.params.filename;
     console.log('filename:' + filename);
 
     var fullpath = path.join(process.cwd(), filename);
-
     console.log('fullpath:' + fullpath);
 
     fs.readFile(fullpath, 'utf-8', function (err, data) {
@@ -30,6 +29,9 @@ function execute (req, res, next) {
 
         res.send('<pre>' + data + '</pre>');
     });
+    //fs.createReadStream(fullpath).on('open', function(err, data) {
+    //    data.pipe(res)
+    //})
 }
 
 function readContent(err, data) {
@@ -43,3 +45,5 @@ function readContent(err, data) {
 }
 
 module.exports = router;
+
+//# sourceMappingURL=reader-compiled.js.map
