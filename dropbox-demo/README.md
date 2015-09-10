@@ -2,7 +2,7 @@
 
 This is a basic Dropbox clone to sync files across multiple remote folders.
 
-Time spent: 6 hour
+Time spent: 10 hour
 
 ### Features
 
