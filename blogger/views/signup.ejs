@@ -19,7 +19,7 @@
         <% } %>
 
         <!-- LOGIN FORM -->
-        <form action="/signup" method="post">
+        <form action="/signup" method="POST">
             <h3>Required:</h3>
             <div class="form-group">
                 <label>Username</label>
@@ -34,21 +34,22 @@
                 <input type="password" class="form-control" name="password">
             </div>
 
+            <hr>
+
+            <h3>Optional:</h3>
+            <div class="form-group">
+                <label>Blog Title</label>
+                <input type="text" class="form-control" name="title">
+            </div>
+            <div class="form-group">
+                <label>Blog Description</label>
+                <input type="text" class="form-control" name="description">
+            </div>
+
             <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+
+            <hr>
         </form>
-
-        <hr>
-
-        <h3>Optional:</h3>
-        <div class="form-group">
-            <label>Blog Title</label>
-            <input type="text" class="form-control" name="title">
-        </div>
-        <div class="form-group">
-            <label>Blog Description</label>
-            <input type="text" class="form-control" name="description">
-        </div>
-
         <p>Need an account ? <a href="/signup">Signup</a></p>
         <p>Or go <a href="/">home</a></p>
     </div>

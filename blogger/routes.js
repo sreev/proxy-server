@@ -14,6 +14,7 @@ module.exports = (app) => {
     })
 
     app.get('/login', (req, res) => {
+        console.log('get-login')
         res.render('login.ejs', {message: req.flash('error')})
     })
 
@@ -24,6 +25,7 @@ module.exports = (app) => {
     }))
 
     app.get('/signup', (req, res) => {
+        console.log('get-signup' + req)
         res.render('signup.ejs', {message: req.flash('error')})
     })
 

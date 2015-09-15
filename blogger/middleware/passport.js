@@ -15,6 +15,7 @@ module.exports = (app) => {
         usernameField: 'username',
         failureFlash: true
     }, nodeifyit(async (username, password) => {
+            console.log('post-login')
             let user
 
             if (username.indexOf('@')) {
@@ -45,14 +46,18 @@ module.exports = (app) => {
         failureFlash: true,
         passReqToCallback: true
     }, nodeifyit(async (req, email, password) => {
+            console.log('post-signup')
             email = (email || '').toLowerCase()
 
             if (await User.promise.findOne({email})) {
                 return [false, {message: 'That email is already taken.'}]
             }
 
+            //console.log(req)
+            //console.log(req.body)
+
             let {username, title, description} = req.body
-            console.log(req.body)
+            //console.log(req.body)
 
             let regexp = new RegExp(username, 'i')
             let query = {username: {$regex: regexp}}
@@ -63,6 +68,7 @@ module.exports = (app) => {
                 if (await User.promise.findOne(query)) {
                     return [false, {message: 'That username is already taken.'}]
                 }
+                console.log('username new: ' + username)
             }
             catch(e) {
                 console.log(e)
@@ -78,7 +84,11 @@ module.exports = (app) => {
 
             //return await user.save()
             try {
-                return await user.save()
+                //return await user.save()
+                let mongoreturn = user.save()
+                console.log(mongoreturn)
+
+                return mongoreturn
             }
             catch(e) {
                 console.log(util.inspect(e))
