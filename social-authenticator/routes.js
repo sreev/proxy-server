@@ -17,6 +17,7 @@ module.exports = (app) => {
     let passport = app.passport
     let twitterConfig = app.config.auth.twitterAuth
 
+    console.log(twitterConfig)
     //
 
     app.get('/', (req, res) => res.render('index.ejs'))

@@ -21,7 +21,9 @@ app.config = {
   database: config.database[NODE_ENV]
 }
 
-passportMiddleware.configure(config.auth[NODE_ENV])
+console.log(config)
+//passportMiddleware.configure(config.auth[NODE_ENV])
+passportMiddleware.configure(config)
 app.passport = passportMiddleware.passport
 
 // connect to the database

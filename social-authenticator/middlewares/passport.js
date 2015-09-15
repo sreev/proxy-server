@@ -61,15 +61,15 @@ function configure(config) {
   console.log(config)
   // usage
   usePassportStrategy(FacebookStrategy, {
-    clientID: config.facebookAuth.consumerKey,
-    clientSecret: config.facebookAuth.consumerSecret,
-    callbackURL: config.facebookAuth.callbackUrl,
+    clientID: config.auth.facebookAuth.consumerKey,
+    clientSecret: config.auth.facebookAuth.consumerSecret,
+    callbackURL: config.auth.facebookAuth.callbackUrl,
   }, 'facebook')
 
   usePassportStrategy(TwitterStrategy, {
-    consumerKey: config.twitterAuth.consumerKey,
-    consumerSecret: config.twitterAuth.consumerSecret,
-    callbackURL: config.twitterAuth.callbackUrl,
+    consumerKey: config.auth.twitterAuth.consumerKey,
+    consumerSecret: config.auth.twitterAuth.consumerSecret,
+    callbackURL: config.auth.twitterAuth.callbackUrl,
   }, 'twitter')
 
   // useExternalPassportStrategy(LinkedInStrategy, {...}, 'linkedin')
