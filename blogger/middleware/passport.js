@@ -82,13 +82,15 @@ module.exports = (app) => {
             //user.password = await user.generateHash(password)
             user.password = password
 
+            req.user =  user
+
             //return await user.save()
             try {
-                //return await user.save()
-                let mongoreturn = user.save()
-                console.log(mongoreturn)
-
-                return mongoreturn
+                return await user.save()
+                //let mongoreturn = user.save()
+                //console.log(mongoreturn)
+                //
+                //return mongoreturn
             }
             catch(e) {
                 console.log(util.inspect(e))

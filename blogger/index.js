@@ -48,6 +48,6 @@ passportMiddleware(app)
 routes(app)
 
 //
-mongoose.connect('mongodb://127.0.0.1:27017/blogger-demo')
+mongoose.connect('mongodb://127.0.0.1:27017/blogger-demo-new')
 //
 app.listen(PORT, () => console.log(`Listening @ http://127.0.0.1:${PORT}`))

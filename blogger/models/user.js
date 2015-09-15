@@ -20,7 +20,7 @@ let UserSchema = mongoose.Schema({
     blogTitle: String,
     blogDescription: String
 })
-
+/*
 UserSchema.methods.generateHash = async function(password) {
     return await bcrypt.promise.hash(password, 8)
 }
@@ -43,5 +43,5 @@ UserSchema.pre('save', function (callback) {
         this.password = await this.generateHash(this.password)
     }(), callback)
 })
-
+*/
 module.exports = mongoose.model('User', UserSchema)
