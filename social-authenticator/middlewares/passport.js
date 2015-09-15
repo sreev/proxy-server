@@ -4,6 +4,9 @@ let nodeifyit = require('nodeifyit')
 let FacebookStrategy = require('passport-facebook').Strategy
 let TwitterStrategy = require('passport-twitter').Strategy
 
+let requireDir = require('require-dir')
+let config = requireDir('../config', {recurse: true})
+
 require('songbird')
 
 function usePassportStrategy(OauthStrategy, config, field) {
