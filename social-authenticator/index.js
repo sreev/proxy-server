@@ -20,6 +20,7 @@ app.config = {
   auth: config.auth[NODE_ENV],
   database: config.database[NODE_ENV]
 }
+
 passportMiddleware.configure(config.auth[NODE_ENV])
 app.passport = passportMiddleware.passport
 

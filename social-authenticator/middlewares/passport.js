@@ -28,7 +28,7 @@ function configure(config) {
   }))
 
   // useExternalPassportStrategy(LinkedInStrategy, {...}, 'linkedin')
-  // useExternalPassportStrategy(LinkedInStrategy, {...}, 'facebook')
+  // useExternalPassportStrategy(FacebookStrategy, {...}, 'facebook')
   // useExternalPassportStrategy(LinkedInStrategy, {...}, 'google')
   // useExternalPassportStrategy(TwitterStrategy, {...}, 'twitter')
   // passport.use('local-login', new LocalStrategy({...}, (req, email, password, callback) => {...}))

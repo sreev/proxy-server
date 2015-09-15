@@ -15,7 +15,7 @@ let networks = {
 
 module.exports = (app) => {
     let passport = app.passport
-    let twitterConfig = app.config.auth.twitter
+    let twitterConfig = app.config.auth.twitterAuth
 
     //
 
