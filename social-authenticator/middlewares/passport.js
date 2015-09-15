@@ -1,7 +1,38 @@
 let passport = require('passport')
 let nodeifyit = require('nodeifyit')
+
+let FacebookStrategy = require('passport-facebook').Strategy
+let TwitterStrategy = require('passport-twitter').Strategy
+
 require('songbird')
 
+function usePassportStrategy(OauthStrategy, config, field) {
+  config.passReqToCallback = true
+  passport.use(new OauthStrategy(config, nodeifyit(authCB, {spread: true})))
+
+  async function authCB(req, token, secret, account) {
+    let user = await User.promise.findOne({[field+'.id']: account.id})
+
+    // Is user logged in? => Link to existing account
+    if (req.user) {
+      // Logged-in user and existing user tied to 3rd-party account are different
+      if (user && user.id !== req.user.id) {
+        return [false, {message: 'That account is linked to another user already.'}]
+      }
+      req.user.linkAccount(field, {account, token, secret})
+
+      return req.user
+    }
+
+    // Login existing using via 3rd party auth
+    if (user) return user
+
+    // Otherwise, create a new user for the linked account
+    return await new User().linkAccount(field, {account, token, secret})
+  }
+}
+
+/*
 function useExternalPassportStrategy(OauthStrategy, config, field) {
   config.passReqToCallback = true
   passport.use(new OauthStrategy(config, nodeifyit(authCB, {spread: true})))
@@ -16,21 +47,30 @@ function useExternalPassportStrategy(OauthStrategy, config, field) {
       // 3b. Otherwise create a user associated with the 3rd party account
   }
 }
+*/
 
 function configure(config) {
-  // Required for session support / persistent login sessions
-  passport.serializeUser(nodeifyit(async (user) => {
-    throw new Error('Not implemented.')
+  passport.serializeUser(nodeifyit(async (user) => user._id))
+  passport.deserializeUser(nodeifyit(async (id) => {
+    return await User.promise.findById(id)
   }))
 
-  passport.deserializeUser(nodeifyit(async (user) => {
-    throw new Error('Not implemented.')
-  }))
+  console.log(config)
+  // usage
+  usePassportStrategy(FacebookStrategy, {
+    clientID: config.facebookAuth.consumerKey,
+    clientSecret: config.facebookAuth.consumerSecret,
+    callbackURL: config.facebookAuth.callbackUrl,
+  }, 'facebook')
+
+  usePassportStrategy(TwitterStrategy, {
+    consumerKey: config.twitterAuth.consumerKey,
+    consumerSecret: config.twitterAuth.consumerSecret,
+    callbackURL: config.twitterAuth.callbackUrl,
+  }, 'twitter')
 
   // useExternalPassportStrategy(LinkedInStrategy, {...}, 'linkedin')
-  // useExternalPassportStrategy(FacebookStrategy, {...}, 'facebook')
   // useExternalPassportStrategy(LinkedInStrategy, {...}, 'google')
-  // useExternalPassportStrategy(TwitterStrategy, {...}, 'twitter')
   // passport.use('local-login', new LocalStrategy({...}, (req, email, password, callback) => {...}))
   // passport.use('local-signup', new LocalStrategy({...}, (req, email, password, callback) => {...}))
 

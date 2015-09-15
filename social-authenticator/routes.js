@@ -200,7 +200,24 @@ module.exports = (app) => {
         res.end()
     }))
 
+    // Scope specifies the desired data fields from the user account
+    let scope = 'email'
+
+    // Authentication route & Callback URL
+    app.get('/auth/facebook', passport.authenticate('facebook', {scope}))
+    app.get('/auth/facebook/callback', passport.authenticate('facebook', {
+        successRedirect: '/profile',
+        failureRedirect: '/profile',
+        failureFlash: true
+    }))
+
+    // Authorization route & Callback URL
+    app.get('/connect/facebook', passport.authorize('facebook', {scope}))
+    app.get('/connect/facebook/callback', passport.authorize('facebook', {
+        successRedirect: '/profile',
+        failureRedirect: '/profile',
+        failureFlash: true
+    }))
+
     return passport
 }
-
-// facebook passport strategy

@@ -55,7 +55,7 @@ module.exports = (app) => {
             console.log(req.body)
 
             let regexp = new RegExp(username, 'i')
-            let query = {username: {$regexp: regexp}}
+            let query = {username: {$regex: regexp}}
 
             console.log(query)
 
